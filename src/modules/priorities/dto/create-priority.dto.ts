@@ -7,4 +7,4 @@ export const CreatePrioritySchema = z.object({
   boardId: z.string().uuid('Board ID must be a valid UUID'),
 });
 
-export class CreatePriorityDto extends createZodDto(CreatePrioritySchema) {}
+export class CreatePriorityDto extends createZodDto(CreatePrioritySchema) { }
