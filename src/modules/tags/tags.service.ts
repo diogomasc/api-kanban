@@ -1,13 +1,9 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DATABASE_CONNECTION } from '../../../database/database.module'; // Intentionally using ../../../ if it works? No, I'll stick to ../../database/database.module which is correct relative to src/modules/tags
-// src/modules/tags -> ../ (modules) -> ../ (src)
+import { DATABASE_CONNECTION } from '../../database/database.module';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../database/schema';
 import { CreateTagDto } from './dto/create-tag.dto';
 import { eq } from 'drizzle-orm';
-
-// Fix import path to be safe
-import { DATABASE_CONNECTION as DB_CONN } from '../../database/database.module';
 
 @Injectable()
 export class TagsService {

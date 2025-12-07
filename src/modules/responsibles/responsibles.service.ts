@@ -1,11 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DATABASE_CONNECTION } from '../../../database/database.module'; // Intentionally using ../../../ to see if it works or sticking to ../../
-// Wait, Responsibles IS depth 3 (src/modules/responsibles). ../../../ is correct if it goes to root? No.
-// src/modules/responsibles -> ../ (modules) -> ../ (src) -> ../ (root).
-// src/database is in src.
-// So relative path from src/modules/responsibles to src/database is ../../database.
-// I will use ../../database/database.module.
-
+import { DATABASE_CONNECTION } from '../../database/database.module';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 import * as schema from '../../database/schema';
 import { CreateResponsibleDto } from './dto/create-responsible.dto';

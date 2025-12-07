@@ -9,6 +9,7 @@ import { DepartmentsModule } from './modules/departments/departments.module';
 import { PrioritiesModule } from './modules/priorities/priorities.module';
 import { ResponsiblesModule } from './modules/responsibles/responsibles.module';
 import { TagsModule } from './modules/tags/tags.module';
+import { NotesModule } from './modules/notes/notes.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { TagsModule } from './modules/tags/tags.module';
     PrioritiesModule,
     ResponsiblesModule,
     TagsModule,
+    NotesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
