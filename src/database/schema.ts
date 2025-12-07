@@ -1,4 +1,11 @@
-import { pgTable, uuid, text, integer, timestamp, primaryKey } from 'drizzle-orm/pg-core';
+import {
+  pgTable,
+  uuid,
+  text,
+  integer,
+  timestamp,
+  primaryKey,
+} from 'drizzle-orm/pg-core';
 import { relations } from 'drizzle-orm';
 
 // --- Tables ---
@@ -12,27 +19,35 @@ export const boards = pgTable('boards', {
 export const departments = pgTable('departments', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
-  boardId: uuid('board_id').references(() => boards.id).notNull(),
+  boardId: uuid('board_id')
+    .references(() => boards.id)
+    .notNull(),
 });
 
 export const priorities = pgTable('priorities', {
   id: uuid('id').defaultRandom().primaryKey(),
   value: integer('value').notNull(),
   description: text('description').notNull(),
-  boardId: uuid('board_id').references(() => boards.id).notNull(),
+  boardId: uuid('board_id')
+    .references(() => boards.id)
+    .notNull(),
 });
 
 export const responsibles = pgTable('responsibles', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
   role: text('role').notNull(),
-  departmentId: uuid('department_id').references(() => departments.id).notNull(),
+  departmentId: uuid('department_id')
+    .references(() => departments.id)
+    .notNull(),
 });
 
 export const tags = pgTable('tags', {
   id: uuid('id').defaultRandom().primaryKey(),
   name: text('name').notNull(),
-  boardId: uuid('board_id').references(() => boards.id).notNull(),
+  boardId: uuid('board_id')
+    .references(() => boards.id)
+    .notNull(),
 });
 
 export const notes = pgTable('notes', {
@@ -41,23 +56,43 @@ export const notes = pgTable('notes', {
   content: text('content').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   dueDate: timestamp('due_date'),
-  priorityId: uuid('priority_id').references(() => priorities.id).notNull(),
-  boardId: uuid('board_id').references(() => boards.id).notNull(),
+  priorityId: uuid('priority_id')
+    .references(() => priorities.id)
+    .notNull(),
+  boardId: uuid('board_id')
+    .references(() => boards.id)
+    .notNull(),
 });
 
-export const noteTags = pgTable('note_tags', {
-  noteId: uuid('note_id').references(() => notes.id).notNull(),
-  tagId: uuid('tag_id').references(() => tags.id).notNull(),
-}, (t) => ({
-  pk: primaryKey({ columns: [t.noteId, t.tagId] }),
-}));
+export const noteTags = pgTable(
+  'note_tags',
+  {
+    noteId: uuid('note_id')
+      .references(() => notes.id)
+      .notNull(),
+    tagId: uuid('tag_id')
+      .references(() => tags.id)
+      .notNull(),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.noteId, t.tagId] }),
+  }),
+);
 
-export const noteResponsibles = pgTable('note_responsibles', {
-  noteId: uuid('note_id').references(() => notes.id).notNull(),
-  responsibleId: uuid('responsible_id').references(() => responsibles.id).notNull(),
-}, (t) => ({
-  pk: primaryKey({ columns: [t.noteId, t.responsibleId] }),
-}));
+export const noteResponsibles = pgTable(
+  'note_responsibles',
+  {
+    noteId: uuid('note_id')
+      .references(() => notes.id)
+      .notNull(),
+    responsibleId: uuid('responsible_id')
+      .references(() => responsibles.id)
+      .notNull(),
+  },
+  (t) => ({
+    pk: primaryKey({ columns: [t.noteId, t.responsibleId] }),
+  }),
+);
 
 // --- Relations ---
 
@@ -69,7 +104,10 @@ export const boardsRelations = relations(boards, ({ many }) => ({
 }));
 
 export const departmentsRelations = relations(departments, ({ one, many }) => ({
-  board: one(boards, { fields: [departments.boardId], references: [boards.id] }),
+  board: one(boards, {
+    fields: [departments.boardId],
+    references: [boards.id],
+  }),
   responsibles: many(responsibles),
 }));
 
@@ -78,10 +116,16 @@ export const prioritiesRelations = relations(priorities, ({ one, many }) => ({
   notes: many(notes),
 }));
 
-export const responsiblesRelations = relations(responsibles, ({ one, many }) => ({
-  department: one(departments, { fields: [responsibles.departmentId], references: [departments.id] }),
-  notes: many(noteResponsibles),
-}));
+export const responsiblesRelations = relations(
+  responsibles,
+  ({ one, many }) => ({
+    department: one(departments, {
+      fields: [responsibles.departmentId],
+      references: [departments.id],
+    }),
+    notes: many(noteResponsibles),
+  }),
+);
 
 export const tagsRelations = relations(tags, ({ one, many }) => ({
   board: one(boards, { fields: [tags.boardId], references: [boards.id] }),
@@ -90,7 +134,10 @@ export const tagsRelations = relations(tags, ({ one, many }) => ({
 
 export const notesRelations = relations(notes, ({ one, many }) => ({
   board: one(boards, { fields: [notes.boardId], references: [boards.id] }),
-  priority: one(priorities, { fields: [notes.priorityId], references: [priorities.id] }),
+  priority: one(priorities, {
+    fields: [notes.priorityId],
+    references: [priorities.id],
+  }),
   tags: many(noteTags),
   responsibles: many(noteResponsibles),
 }));
@@ -100,7 +147,16 @@ export const noteTagsRelations = relations(noteTags, ({ one }) => ({
   tag: one(tags, { fields: [noteTags.tagId], references: [tags.id] }),
 }));
 
-export const noteResponsiblesRelations = relations(noteResponsibles, ({ one }) => ({
-  note: one(notes, { fields: [noteResponsibles.noteId], references: [notes.id] }),
-  responsible: one(responsibles, { fields: [noteResponsibles.responsibleId], references: [responsibles.id] }),
-}));
+export const noteResponsiblesRelations = relations(
+  noteResponsibles,
+  ({ one }) => ({
+    note: one(notes, {
+      fields: [noteResponsibles.noteId],
+      references: [notes.id],
+    }),
+    responsible: one(responsibles, {
+      fields: [noteResponsibles.responsibleId],
+      references: [responsibles.id],
+    }),
+  }),
+);

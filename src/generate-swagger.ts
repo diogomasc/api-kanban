@@ -11,11 +11,11 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  
+
   const outputPath = join(process.cwd(), 'docs', 'swagger.json');
   fs.writeFileSync(outputPath, JSON.stringify(document, null, 2));
   console.log(`Swagger JSON generated at ${outputPath}`);
-  
+
   await app.close();
 }
 bootstrap();

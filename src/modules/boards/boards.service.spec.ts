@@ -6,7 +6,7 @@ import { NotFoundException } from '@nestjs/common';
 
 describe('BoardsService', () => {
   let service: BoardsService;
-  let dbMock;
+  let dbMock: any;
 
   beforeEach(async () => {
     dbMock = createDrizzleMock();
@@ -54,17 +54,17 @@ describe('BoardsService', () => {
   });
 
   describe('findOne', () => {
-      it('should return a board if found', async () => {
-          const resultMock = { id: '1', name: 'Board 1' };
-          dbMock.query.boards.findFirst.mockResolvedValue(resultMock);
+    it('should return a board if found', async () => {
+      const resultMock = { id: '1', name: 'Board 1' };
+      dbMock.query.boards.findFirst.mockResolvedValue(resultMock);
 
-          const result = await service.findOne('1');
-          expect(result).toEqual(resultMock);
-      });
+      const result = await service.findOne('1');
+      expect(result).toEqual(resultMock);
+    });
 
-      it('should throw NotFoundException if not found', async () => {
-          dbMock.query.boards.findFirst.mockResolvedValue(null);
-          await expect(service.findOne('1')).rejects.toThrow(NotFoundException);
-      });
+    it('should throw NotFoundException if not found', async () => {
+      dbMock.query.boards.findFirst.mockResolvedValue(null);
+      await expect(service.findOne('1')).rejects.toThrow(NotFoundException);
+    });
   });
 });

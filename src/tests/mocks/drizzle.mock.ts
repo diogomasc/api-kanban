@@ -9,20 +9,20 @@ export const createDrizzleMock = () => ({
       findFirst: jest.fn(),
     },
     priorities: {
-        findMany: jest.fn(),
-        findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
     },
     responsibles: {
-        findMany: jest.fn(),
-        findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
     },
     tags: {
-        findMany: jest.fn(),
-        findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
     },
     notes: {
-        findMany: jest.fn(),
-        findFirst: jest.fn(),
+      findMany: jest.fn(),
+      findFirst: jest.fn(),
     },
   },
   insert: jest.fn().mockReturnThis(),
@@ -32,7 +32,8 @@ export const createDrizzleMock = () => ({
   set: jest.fn().mockReturnThis(),
   where: jest.fn().mockReturnThis(),
   delete: jest.fn().mockReturnThis(),
-  transaction: jest.fn((cb) => cb({
+  transaction: jest.fn((cb) =>
+    cb({
       insert: jest.fn().mockReturnThis(),
       values: jest.fn().mockReturnThis(),
       returning: jest.fn(),
@@ -40,5 +41,6 @@ export const createDrizzleMock = () => ({
       set: jest.fn().mockReturnThis(),
       where: jest.fn().mockReturnThis(),
       delete: jest.fn().mockReturnThis(),
-  })),
+    }),
+  ),
 });

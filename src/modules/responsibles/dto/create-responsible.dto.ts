@@ -7,4 +7,6 @@ export const CreateResponsibleSchema = z.object({
   departmentId: z.string().uuid('Department ID must be a valid UUID'),
 });
 
-export class CreateResponsibleDto extends createZodDto(CreateResponsibleSchema) {}
+export class CreateResponsibleDto extends createZodDto(
+  CreateResponsibleSchema,
+) {}

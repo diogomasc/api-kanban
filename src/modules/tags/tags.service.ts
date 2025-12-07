@@ -8,7 +8,7 @@ import { eq } from 'drizzle-orm';
 @Injectable()
 export class TagsService {
   constructor(
-    @Inject(DB_CONN)
+    @Inject(DATABASE_CONNECTION)
     private readonly db: NodePgDatabase<typeof schema>,
   ) {}
 
