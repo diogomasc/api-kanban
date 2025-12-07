@@ -1,0 +1,46 @@
+erDiagram
+    BOARD ||--o{ DEPARTMENT : has
+    BOARD ||--o{ PRIORITY : contains
+    BOARD ||--o{ TAG : contains
+    BOARD ||--o{ NOTE : contains
+    DEPARTMENT ||--o{ RESPONSIBLE : has
+    NOTE }o--o{ TAG : classified_by
+    NOTE }o--o{ RESPONSIBLE : assigned_to
+    NOTE }o--|| PRIORITY : has_urgency
+
+    BOARD {
+        uuid id
+        string name
+        timestamp created_at
+    }
+    DEPARTMENT {
+        uuid id
+        string name
+        uuid board_id
+    }
+    PRIORITY {
+        uuid id
+        int value
+        string description
+        uuid board_id
+    }
+    TAG {
+        uuid id
+        string name
+        uuid board_id
+    }
+    RESPONSIBLE {
+        uuid id
+        string name
+        string role
+        uuid department_id
+    }
+    NOTE {
+        uuid id
+        string title
+        string content
+        timestamp created_at
+        timestamp due_date
+        uuid priority_id
+        uuid board_id
+    }
