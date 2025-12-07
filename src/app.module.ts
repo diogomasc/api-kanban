@@ -7,6 +7,8 @@ import { DatabaseModule } from './database/database.module';
 import { BoardsModule } from './modules/boards/boards.module';
 import { DepartmentsModule } from './modules/departments/departments.module';
 import { PrioritiesModule } from './modules/priorities/priorities.module';
+import { ResponsiblesModule } from './modules/responsibles/responsibles.module';
+import { TagsModule } from './modules/tags/tags.module';
 
 @Module({
   imports: [
@@ -25,6 +27,8 @@ import { PrioritiesModule } from './modules/priorities/priorities.module';
     BoardsModule,
     DepartmentsModule,
     PrioritiesModule,
+    ResponsiblesModule,
+    TagsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
