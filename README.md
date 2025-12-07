@@ -51,10 +51,22 @@ Swagger: `http://localhost:3000/docs`.
 
 ## 🧪 Testes
 
-Rodar testes unitários:
+Rodar testes unitários: (Em desenvolvimento)
 
 ```bash
 npm run test
+```
+
+Rodar testes com cobertura:
+
+```bash
+npm run test:cov
+```
+
+Rodar testes e2e: (Em desenvolvimento)
+
+```bash
+npm run test:e2e
 ```
 
 ## 📐 Diagrama de Entidades
@@ -70,10 +82,36 @@ erDiagram
     NOTE }o--o{ RESPONSIBLE : atribuido
     NOTE }o--|| PRIORITY : possui
 
-    BOARD { uuid id, string name }
-    DEPARTMENT { uuid id, string name, uuid board_id }
-    PRIORITY { uuid id, int value, string description, uuid board_id }
-    TAG { uuid id, string name, uuid board_id }
-    RESPONSIBLE { uuid id, string name, string role, uuid department_id }
-    NOTE { uuid id, string title, string content, timestamp due_date }
+    BOARD {
+        uuid id
+        string name
+    }
+    DEPARTMENT {
+        uuid id
+        string name
+        uuid board_id
+    }
+    PRIORITY {
+        uuid id
+        int value
+        string description
+        uuid board_id
+    }
+    TAG {
+        uuid id
+        string name
+        uuid board_id
+    }
+    RESPONSIBLE {
+        uuid id
+        string name
+        string role
+        uuid department_id
+    }
+    NOTE {
+        uuid id
+        string title
+        string content
+        timestamp due_date
+    }
 ```
