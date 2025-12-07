@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { BoardsModule } from './modules/boards/boards.module';
+import { DepartmentsModule } from './modules/departments/departments.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { BoardsModule } from './modules/boards/boards.module';
     }),
     DatabaseModule,
     BoardsModule,
+    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
