@@ -15,7 +15,6 @@ export class NotesService {
   async create(createNoteDto: CreateNoteDto) {
     const { tagIds, responsibleIds, dueDate, ...noteData } = createNoteDto;
 
-    // Convert string date to Date object if present
     const finalDueDate = dueDate ? new Date(dueDate) : null;
 
     return await this.db.transaction(async (tx) => {
@@ -44,10 +43,6 @@ export class NotesService {
           })),
         );
       }
-
-      // Return complete note with relations
-      // But query inside transaction? Or fetch after.
-      // Drizzle transaction supports returning.
 
       return note;
     });
@@ -90,7 +85,6 @@ export class NotesService {
 
       if (!note) throw new NotFoundException('Note not found');
 
-      // Update tags: delete all and insert new
       await tx.delete(schema.noteTags).where(eq(schema.noteTags.noteId, id));
       if (tagIds && tagIds.length > 0) {
         await tx.insert(schema.noteTags).values(
@@ -101,7 +95,6 @@ export class NotesService {
         );
       }
 
-      // Update responsibles
       await tx
         .delete(schema.noteResponsibles)
         .where(eq(schema.noteResponsibles.noteId, id));
@@ -119,9 +112,6 @@ export class NotesService {
   }
 
   async remove(id: string) {
-    // Delete pivots first? FK with cascade might handle it, but typically explicit delete is safer if no cascade.
-    // Assuming Drizzle DDL didn't set CASCADE, so we manually delete pivots.
-
     await this.db.delete(schema.noteTags).where(eq(schema.noteTags.noteId, id));
     await this.db
       .delete(schema.noteResponsibles)

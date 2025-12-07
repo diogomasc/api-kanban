@@ -13,7 +13,6 @@ export class DepartmentsService {
   ) {}
 
   async create(createDepartmentDto: CreateDepartmentDto) {
-    // Ideally verify board existence or rely on FK constraint
     const [department] = await this.db
       .insert(schema.departments)
       .values(createDepartmentDto)
