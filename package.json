@@ -66,4 +66,10 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-    "collectCove
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  }
+}
