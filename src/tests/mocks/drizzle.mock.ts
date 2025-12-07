@@ -1,46 +1,48 @@
+import { vi } from 'vitest';
+
 export const createDrizzleMock = () => ({
   query: {
     boards: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
     departments: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
     priorities: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
     responsibles: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
     tags: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
     notes: {
-      findMany: jest.fn(),
-      findFirst: jest.fn(),
+      findMany: vi.fn(),
+      findFirst: vi.fn(),
     },
   },
-  insert: jest.fn().mockReturnThis(),
-  values: jest.fn().mockReturnThis(),
-  returning: jest.fn(),
-  update: jest.fn().mockReturnThis(),
-  set: jest.fn().mockReturnThis(),
-  where: jest.fn().mockReturnThis(),
-  delete: jest.fn().mockReturnThis(),
-  transaction: jest.fn((cb) =>
+  insert: vi.fn().mockReturnThis(),
+  values: vi.fn().mockReturnThis(),
+  returning: vi.fn(),
+  update: vi.fn().mockReturnThis(),
+  set: vi.fn().mockReturnThis(),
+  where: vi.fn().mockReturnThis(),
+  delete: vi.fn().mockReturnThis(),
+  transaction: vi.fn((cb) =>
     cb({
-      insert: jest.fn().mockReturnThis(),
-      values: jest.fn().mockReturnThis(),
-      returning: jest.fn(),
-      update: jest.fn().mockReturnThis(),
-      set: jest.fn().mockReturnThis(),
-      where: jest.fn().mockReturnThis(),
-      delete: jest.fn().mockReturnThis(),
+      insert: vi.fn().mockReturnThis(),
+      values: vi.fn().mockReturnThis(),
+      returning: vi.fn(),
+      update: vi.fn().mockReturnThis(),
+      set: vi.fn().mockReturnThis(),
+      where: vi.fn().mockReturnThis(),
+      delete: vi.fn().mockReturnThis(),
     }),
   ),
 });
