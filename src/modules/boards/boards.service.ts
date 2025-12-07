@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { DATABASE_CONNECTION } from '../../../database/database.module';
+import { DATABASE_CONNECTION } from '../../database/database.module';
 import { NodePgDatabase } from 'drizzle-orm/node-postgres';
-import * as schema from '../../../database/schema';
+import * as schema from '../../database/schema';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { eq } from 'drizzle-orm';
 
