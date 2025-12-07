@@ -67,4 +67,53 @@ describe('BoardsService', () => {
       await expect(service.findOne('1')).rejects.toThrow(NotFoundException);
     });
   });
+
+  describe('update', () => {
+    it('should update a board', async () => {
+      const dto = { name: 'Updated Board' };
+      const resultMock = { id: '1', ...dto, createdAt: new Date() };
+
+      dbMock.update.mockReturnValue(dbMock);
+      dbMock.set.mockReturnValue(dbMock);
+      dbMock.where.mockReturnValue(dbMock);
+      dbMock.returning.mockResolvedValue([resultMock]);
+
+      const result = await service.update('1', dto);
+      expect(result).toEqual(resultMock);
+      expect(dbMock.update).toHaveBeenCalled();
+    });
+
+    it('should throw NotFoundException if board not found during update', async () => {
+      const dto = { name: 'Updated Board' };
+
+      dbMock.update.mockReturnValue(dbMock);
+      dbMock.set.mockReturnValue(dbMock);
+      dbMock.where.mockReturnValue(dbMock);
+      dbMock.returning.mockResolvedValue([]);
+
+      await expect(service.update('1', dto)).rejects.toThrow(NotFoundException);
+    });
+  });
+
+  describe('remove', () => {
+    it('should remove a board', async () => {
+      const resultMock = { id: '1', name: 'Board 1' };
+
+      dbMock.delete.mockReturnValue(dbMock);
+      dbMock.where.mockReturnValue(dbMock);
+      dbMock.returning.mockResolvedValue([resultMock]);
+
+      const result = await service.remove('1');
+      expect(result).toEqual(resultMock);
+      expect(dbMock.delete).toHaveBeenCalled();
+    });
+
+    it('should throw NotFoundException if board not found during removal', async () => {
+      dbMock.delete.mockReturnValue(dbMock);
+      dbMock.where.mockReturnValue(dbMock);
+      dbMock.returning.mockResolvedValue([]);
+
+      await expect(service.remove('1')).rejects.toThrow(NotFoundException);
+    });
+  });
 });

@@ -14,7 +14,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 @ApiTags('Boards')
 @Controller('boards')
 export class BoardsController {
-  constructor(private readonly boardsService: BoardsService) {}
+  constructor(private readonly boardsService: BoardsService) { }
 
   @Post()
   @ApiOperation({ summary: 'Create a new board' })
