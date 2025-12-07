@@ -15,3 +15,14 @@ Thumbs.db
 .env
 .env.production
 .env.test
+
+# coverage
+/coverage
+
+# drizzle
+/drizzle
+
+# misc
+tsc_errors.txt
+lint_log.txt
+audit_log.txt
